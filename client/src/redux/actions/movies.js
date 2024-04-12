@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Dispatch } from "redux";
 import {
     setMovies,
     setLoading,
@@ -14,7 +13,7 @@ export const getMovies = (page) => async (dispatch) => {
     dispatch(setLoading());
     try {
         const { data } = await axios.get(
-            `http://localhost:5001/api/all/${page}/${9}`
+            `http://localhost:5001/api/all/${page}/${8}`
         );
         const { movies, pagination } = data;
         dispatch(setMovies(movies));

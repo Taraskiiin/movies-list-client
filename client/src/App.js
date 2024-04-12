@@ -4,13 +4,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import MoviesScreen from "./screens/MoviesScreen";
 import MovieScreen from "./screens/MovieScreen";
-import Header from "./components/Header";
 
 function App() {
     return (
         <ChakraProvider>
             <Router>
-                <Header />
                 <main>
                     <Routes>
                         <Route

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     Box,
     Wrap,
+    Grid,
     WrapItem,
     Center,
     IconButton,
@@ -19,13 +20,16 @@ import {
 } from "react-icons/md";
 
 import { getMovies } from "../redux/actions/movies";
+
 import MovieCard from "../components/MovieCard";
+import Header from "../components/Header";
 
 export default function MoviesScreen() {
     const dispatch = useDispatch();
 
     const { loading, error, movies, pagination, favoritesToggled } =
         useSelector((state) => state.movies);
+    const search = useSelector((state) => state.search);
 
     useEffect(() => {
         if (!movies?.length || movies?.length < 0) {
@@ -37,13 +41,26 @@ export default function MoviesScreen() {
         dispatch(getMovies(page));
     };
 
+    const filteredMovies = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
-        <Box>
-            <Wrap
-                spacing="30px"
-                justify="center"
-                minHeight="80hv"
-                mx={{ base: "12", md: "20", lg: "32" }}
+        <Box
+            position="relative"
+            height="100%"
+        >
+            <Header />
+            <Grid
+                templateColumns={{
+                    base: "repeat(1, 1fr)",
+                    md: "repeat(2, 1fr)",
+                    lg: "repeat(3, 1fr)",
+                }}
+                maxWidth={"1024px"}
+                gap="20px"
+                justifyItems="center"
+                mx="auto"
             >
                 {error ? (
                     <Alert status="error">
@@ -52,7 +69,7 @@ export default function MoviesScreen() {
                         <AlertDescription>{error}</AlertDescription>
                     </Alert>
                 ) : (
-                    movies?.map((movie) => (
+                    filteredMovies?.map((movie) => (
                         <WrapItem key={movie.id}>
                             <Center
                                 w="250px"
@@ -66,12 +83,14 @@ export default function MoviesScreen() {
                         </WrapItem>
                     ))
                 )}
-            </Wrap>
-            {!favoritesToggled && !error && (
+            </Grid>
+            {!favoritesToggled && !error && !search && (
                 <Wrap
                     spacing="30px"
                     justify="center"
                     p="5"
+                    bottom="0"
+                    mx="auto"
                 >
                     <IconButton
                         icon={<MdOutlineKeyboardDoubleArrowLeft />}
