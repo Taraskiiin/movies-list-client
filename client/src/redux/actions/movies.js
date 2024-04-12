@@ -107,3 +107,21 @@ export const removeMovie = (id) => async (dispatch) => {
         );
     }
 };
+
+export const createMovie = (movie) => async (dispatch) => {
+    const firstPage = 1;
+    try {
+        await axios.post(`http://localhost:5001/api/new`, movie);
+        dispatch(getMovies(firstPage));
+    } catch (error) {
+        dispatch(
+            setError(
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+                    ? error.message
+                    : "An expected error has occurred. Please try again later"
+            )
+        );
+    }
+};
