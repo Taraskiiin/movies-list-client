@@ -1,7 +1,18 @@
 import React, { useEffect } from "react";
-import { Box, Image, Text, Badge, Skeleton } from "@chakra-ui/react";
+import { Link as ReactLink } from "react-router-dom";
+import {
+    Box,
+    Image,
+    Text,
+    Badge,
+    Skeleton,
+    IconButton,
+    Stack,
+} from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { MdEdit } from "react-icons/md";
 
 import { getMovie } from "../redux/actions/movies";
 
@@ -43,6 +54,28 @@ export default function MovieScreen() {
                         )}
 
                         <Box p="6">
+                            <Stack
+                                w="100%"
+                                flexDirection="row"
+                                justifyContent="space-between"
+                                display="flex"
+                                mb="10"
+                            >
+                                <IconButton
+                                    icon={<IoMdArrowRoundBack size={20} />}
+                                    as={ReactLink}
+                                    colorScheme="cyan"
+                                    to="/"
+                                    aria-label={""}
+                                />
+                                <IconButton
+                                    icon={<MdEdit size={20} />}
+                                    as={ReactLink}
+                                    colorScheme="yellow"
+                                    to={`/edit/${id}`}
+                                    aria-label={""}
+                                />
+                            </Stack>
                             <Box
                                 d="flex"
                                 alignItems="baseline"

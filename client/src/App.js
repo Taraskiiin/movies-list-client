@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import MoviesScreen from "./screens/MoviesScreen";
 import MovieScreen from "./screens/MovieScreen";
 import CreateScreen from "./screens/CreateScreen";
+import EditScreen from "./screens/EditScreen";
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                         <Route
                             path="/create"
                             element={<CreateScreen />}
+                        />
+                        <Route
+                            path="/edit/:id"
+                            element={<EditScreen />}
                         />
                     </Routes>
                 </main>
