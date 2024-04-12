@@ -23,6 +23,7 @@ import { getMovies } from "../redux/actions/movies";
 
 import MovieCard from "../components/MovieCard";
 import Header from "../components/Header";
+import AddFilmCard from "../components/AddFilmCard";
 
 export default function MoviesScreen() {
     const dispatch = useDispatch();
@@ -62,6 +63,10 @@ export default function MoviesScreen() {
                 justifyItems="center"
                 mx="auto"
             >
+                {!favoritesToggled &&
+                    !error &&
+                    !search &&
+                    pagination.currentPage === 1 && <AddFilmCard />}
                 {error ? (
                     <Alert status="error">
                         <AlertIcon />

@@ -11,7 +11,7 @@ import {
     removeMovie,
 } from "../redux/actions/movies";
 
-const ProductCard = ({ movie, loading }) => {
+const MovieCard = ({ movie, loading }) => {
     const { id } = movie;
     const dispatch = useDispatch();
 
@@ -128,4 +128,4 @@ const ProductCard = ({ movie, loading }) => {
     );
 };
 
-export default ProductCard;
+export default MovieCard;
